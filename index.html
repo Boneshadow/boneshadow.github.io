@@ -65,6 +65,10 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         .download-card::before {
             content: '';
@@ -96,11 +100,13 @@
             font-size: 1.5rem;
             margin: 0 0 0.5rem 0;
             color: var(--neon-color);
+            text-align: center;
         }
         .card-subtitle {
             color: var(--text-color);
             font-size: 0.9rem;
             margin-bottom: 1rem;
+            text-align: center;
         }
         .progress-bar {
             height: 3px;
@@ -167,6 +173,7 @@
             
             document.body.appendChild(container);
         }
+
         function handleDownload(url) {
             const card = event.currentTarget;
             const progressBar = card.querySelector('.progress-bar');
@@ -193,6 +200,7 @@
                 document.body.removeChild(link);
             }, 1000);
         }
+
         window.addEventListener('DOMContentLoaded', createStars);
     </script>
 </body>
