@@ -37,6 +37,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             overflow-x: hidden;
         }
         h1 {
@@ -54,12 +55,15 @@
             width: 100%;
             max-width: 800px;
             padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
         }
         .download-card {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border-radius: 15px;
-            padding: 1.5rem;
+            padding: 2rem;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -133,6 +137,9 @@
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
             .container { width: 95%; }
+            .download-card {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -173,7 +180,6 @@
             
             document.body.appendChild(container);
         }
-
         function handleDownload(url) {
             const card = event.currentTarget;
             const progressBar = card.querySelector('.progress-bar');
@@ -200,7 +206,6 @@
                 document.body.removeChild(link);
             }, 1000);
         }
-
         window.addEventListener('DOMContentLoaded', createStars);
     </script>
 </body>
