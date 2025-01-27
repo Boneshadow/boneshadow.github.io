@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Files</title>
+    <title>ElpeshkiArchive</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,6 +19,8 @@
 
         h1 {
             margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .download-item {
@@ -47,11 +49,15 @@
             .download-item {
                 width: 80%;
             }
+            h1 {
+                font-size: 2em;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Скачать файлы</h1>
+    <h1>ElpeshkiArchive</h1>
     <div class="container">
         <div class="download-item" onclick="handleDownload('ВАША_ССЫЛКА_1')">Skid</div>
         <div class="download-item" onclick="handleDownload('ВАША_ССЫЛКА_2')">Flux</div>
@@ -59,7 +65,6 @@
 
     <script>
         function handleDownload(url) {
-            // Создаем временный элемент для скачивания
             const link = document.createElement('a');
             link.href = url;
             link.download = true;
