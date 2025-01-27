@@ -10,7 +10,24 @@
         :root {
             --neon-color: #0ff;
             --bg-color: #0a0a12;
-            --card-bg: rgba(15, 15, 25, 0.8);
+            --card-bg: rgba(15, 15, 25, 0.9);
+            --accent-color: #7f00ff;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: twinkle var(--duration) ease-in-out infinite;
         }
 
         body {
@@ -23,23 +40,39 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-image: 
-                radial-gradient(circle at center, rgba(0, 255, 255, 0.05) 0%, transparent 80%);
+            overflow-x: hidden;
         }
 
         h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
+            font-size: 4rem;
             margin: 2rem 0;
             position: relative;
-            text-shadow: 0 0 10px var(--neon-color);
-            color: var(--neon-color);
-            animation: glow 2s ease-in-out infinite alternate;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(45deg, var(--neon-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.5));
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--neon-color), transparent);
+            border-radius: 2px;
+            opacity: 0.8;
         }
 
         .container {
             display: grid;
-            gap: 1.5rem;
+            gap: 2rem;
             width: 100%;
             max-width: 800px;
             padding: 20px;
@@ -47,14 +80,15 @@
 
         .download-card {
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 2rem;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(255, 255, 255, 0.15);
             position: relative;
             overflow: hidden;
+            transform-style: preserve-3d;
         }
 
         .download-card::before {
@@ -70,12 +104,12 @@
                 rgba(255, 255, 255, 0.1),
                 transparent
             );
-            transition: 0.5s;
+            transition: 0.6s;
         }
 
         .download-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+            transform: translateY(-8px) rotateX(5deg) rotateY(-5deg);
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.3);
         }
 
         .download-card:hover::before {
@@ -83,25 +117,27 @@
         }
 
         .download-card:active {
-            transform: scale(0.98);
+            transform: scale(0.97);
         }
 
         .card-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin: 0 0 0.5rem 0;
             color: var(--neon-color);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
         }
 
         .card-subtitle {
             color: #aaa;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            letter-spacing: 1px;
         }
 
         .progress-bar {
-            height: 3px;
+            height: 4px;
             background: rgba(255, 255, 255, 0.1);
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             border-radius: 2px;
             overflow: hidden;
             display: none;
@@ -109,27 +145,34 @@
 
         .progress {
             height: 100%;
-            background: var(--neon-color);
+            background: linear-gradient(90deg, var(--accent-color), var(--neon-color));
             width: 0;
-            transition: width 0.3s ease;
+            transition: width 0.4s ease;
         }
 
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px var(--neon-color);
-            }
-            to {
-                text-shadow: 0 0 20px var(--neon-color), 0 0 30px var(--neon-color);
-            }
+        @keyframes titleGlow {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.5)); }
+            50% { filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.8)); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
+                letter-spacing: 2px;
             }
             
             .container {
                 width: 95%;
+                gap: 1.5rem;
+            }
+            
+            .download-card {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -155,15 +198,31 @@
     </div>
 
     <script>
+        function createStars() {
+            const container = document.createElement('div');
+            container.className = 'stars';
+            
+            for(let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 4}px`;
+                star.style.height = star.style.width;
+                star.style.setProperty('--duration', `${1.5 + Math.random() * 4}s`);
+                container.appendChild(star);
+            }
+            
+            document.body.appendChild(container);
+        }
+
         function handleDownload(url) {
             const card = event.currentTarget;
             const progressBar = card.querySelector('.progress-bar');
             const progress = card.querySelector('.progress');
 
-            // Показать прогресс бар
             progressBar.style.display = 'block';
             
-            // Анимация загрузки
             let width = 0;
             const interval = setInterval(() => {
                 if (width >= 100) {
@@ -176,7 +235,6 @@
                 }
             }, 50);
 
-            // Имитация скачивания
             setTimeout(() => {
                 const link = document.createElement('a');
                 link.href = url;
@@ -186,6 +244,8 @@
                 document.body.removeChild(link);
             }, 1000);
         }
+
+        window.addEventListener('DOMContentLoaded', createStars);
     </script>
 </body>
 </html>
