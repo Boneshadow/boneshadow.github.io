@@ -5,8 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ElpeshkiArchive</title>
     <style>
-        /* ... (остальные стили остаются без изменений) ... */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;500&display=swap');
 
+        :root {
+            --neon-color: #0ff;
+            --bg-color: #0a0a12;
+            --card-bg: rgba(15, 15, 25, 0.8);
+            --text-color: white;
+            --theme-toggle-bg: #2d2d2d;
+        }
+
+        .light-theme {
+            --neon-color: #0077ff;
+            --bg-color: #f0f0f5;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-color: #1a1a1a;
+            --theme-toggle-bg: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        /* Стили для переключателя темы */
         .theme-toggle {
             position: fixed;
             top: 20px;
@@ -54,18 +84,6 @@
             transform: translate(-50%, -50%) scale(0.5);
         }
 
-        .theme-toggle__sun::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: #ffeb3b;
-            animation: sunrays 2s infinite linear;
-        }
-
         .light-theme .theme-toggle__moon {
             opacity: 0;
             transform: translate(-50%, -50%) rotate(90deg) scale(0.5);
@@ -76,28 +94,59 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
-        @keyframes sunrays {
-            0% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.1;
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.2);
-                opacity: 0.05;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1.4);
-                opacity: 0;
-            }
+        /* Основные стили */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            margin: 2rem 0;
+            color: var(--neon-color);
+            text-shadow: 0 0 10px var(--neon-color);
+            animation: glow 2s ease-in-out infinite alternate;
         }
 
-        @keyframes moonRotation {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
+        .container {
+            display: grid;
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .download-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 119, 255, 0.2);
+        }
+
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--neon-color);
+        }
+
+        .card-subtitle {
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--neon-color); }
+            to { text-shadow: 0 0 20px var(--neon-color), 0 0 30px var(--neon-color); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { width: 95%; }
         }
     </style>
 </head>
@@ -109,10 +158,45 @@
         </div>
     </button>
     
-    <!-- ... (остальная часть HTML остаётся без изменений) ... -->
+    <h1>ElpeshkiArchive</h1>
+    <div class="container">
+        <div class="download-card" onclick="handleDownload('ВАША_ССЫЛКА_1')">
+            <div class="card-title">Skid</div>
+            <div class="card-subtitle">Click to download</div>
+        </div>
+        
+        <div class="download-card" onclick="handleDownload('ВАША_ССЫЛКА_2')">
+            <div class="card-title">Flux</div>
+            <div class="card-subtitle">Click to download</div>
+        </div>
+    </div>
 
     <script>
-        // ... (остальной JavaScript остаётся без изменений) ... 
+        function saveTheme(theme) {
+            localStorage.setItem('theme', theme);
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.classList.toggle('light-theme', savedTheme === 'light');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            const isLightTheme = document.body.classList.contains('light-theme');
+            saveTheme(isLightTheme ? 'light' : 'dark');
+        }
+
+        function handleDownload(url) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = true;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        loadTheme();
     </script>
 </body>
 </html>
