@@ -1,9 +1,72 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Мой сайт</title>
-  </head>
-  <body>
-    <h1>Привет, мир!</h1>
-  </body>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Files</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+        }
+
+        .download-item {
+            background-color: #2d2d2d;
+            padding: 20px 40px;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 200px;
+            text-align: center;
+        }
+
+        .download-item:hover {
+            background-color: #3d3d3d;
+            transform: scale(1.05);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            .download-item {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Скачать файлы</h1>
+    <div class="container">
+        <div class="download-item" onclick="handleDownload('ВАША_ССЫЛКА_1')">Skid</div>
+        <div class="download-item" onclick="handleDownload('ВАША_ССЫЛКА_2')">Flux</div>
+    </div>
+
+    <script>
+        function handleDownload(url) {
+            // Создаем временный элемент для скачивания
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = true;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
 </html>
