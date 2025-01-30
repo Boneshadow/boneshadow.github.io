@@ -299,3 +299,26 @@
             } else if (sortMode === 1) {
                 // Sort by length
                 boxes.sort((a, b) => a.getAttribute('data-name').
+            } else if (sortMode === 1) {
+                // Sort by length
+                boxes.sort((a, b) => a.getAttribute('data-name').length - b.getAttribute('data-name').length);
+                sortMode = 2;
+                sortIcon.textContent = '↕️'; // Length sort icon
+            } else {
+                // Reset to default order
+                boxes.sort((a, b) => {
+                    const indexA = Array.from(container.children).indexOf(a);
+                    const indexB = Array.from(container.children).indexOf(b);
+                    return indexA - indexB;
+                });
+                sortMode = 0;
+                sortIcon.textContent = '🔄'; // Reset icon
+            }
+
+            // Clear and re-append sorted boxes
+            container.innerHTML = '';
+            boxes.forEach(box => container.appendChild(box));
+        }
+    </script>
+</body>
+</html>
