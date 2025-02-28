@@ -298,9 +298,6 @@
                 sortIcon.textContent = '🔤'; // Alphabetical sort icon
             } else if (sortMode === 1) {
                 // Sort by length
-                boxes.sort((a, b) => a.getAttribute('data-name').
-            } else if (sortMode === 1) {
-                // Sort by length
                 boxes.sort((a, b) => a.getAttribute('data-name').length - b.getAttribute('data-name').length);
                 sortMode = 2;
                 sortIcon.textContent = '↕️'; // Length sort icon
