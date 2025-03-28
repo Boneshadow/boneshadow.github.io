@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ElpeshkiArchive</title>
-    <!-- Подключаем Sortable.js для перетаскивания -->
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
+    <!-- Подключение внешних ресурсов -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+
+    <!-- Стили -->
+    <style>
+        /* Общие стили */
         * {
             margin: 0;
             padding: 0;
@@ -31,6 +34,7 @@
             color: #2d3748;
         }
 
+        /* Заголовок */
         h1 {
             font-size: 3.8rem;
             font-weight: 700;
@@ -54,6 +58,8 @@
             transform: translateX(-50%);
             animation: expand 1.2s ease-out;
         }
+
+        /* Анимации */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -62,7 +68,24 @@
             from { width: 0; }
             to { width: 60%; }
         }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(255, 107, 107, 0.5); }
+            to { box-shadow: 0 0 20px rgba(78, 205, 196, 0.8); }
+        }
+        @keyframes tooltipFade {
+            from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
+        /* Элементы управления */
         .controls {
             position: fixed;
             top: 20px;
@@ -118,6 +141,7 @@
             box-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
         }
 
+        /* Контейнер кнопок */
         .container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -151,20 +175,12 @@
         .box:nth-child(9) { --i: 9; }
         .box:nth-child(10) { --i: 10; }
         .box:nth-child(11) { --i: 11; }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
         .box:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
             background: linear-gradient(145deg, #ff6b6b, #4ecdc4);
             color: #fff;
             animation: glow 1.5s infinite alternate;
-        }
-        @keyframes glow {
-            from { box-shadow: 0 0 10px rgba(255, 107, 107, 0.5); }
-            to { box-shadow: 0 0 20px rgba(78, 205, 196, 0.8); }
         }
         .box:active {
             transform: scale(0.95);
@@ -197,10 +213,6 @@
             animation: tooltipFade 0.3s ease forwards;
             z-index: 10;
         }
-        @keyframes tooltipFade {
-            from { opacity: 0; transform: translateX(-50%) translateY(10px); }
-            to { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
         body.light-mode .box[data-description]:hover::after {
             background: rgba(255, 255, 255, 0.95);
             color: #2d3748;
@@ -210,6 +222,7 @@
             background: #c8ebfb;
         }
 
+        /* Анимация загрузки */
         #loadingOverlay {
             position: fixed;
             top: 0;
@@ -230,12 +243,8 @@
             height: 60px;
             animation: spin 1s linear infinite;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
 
-        /* Медиа-запросы для адаптивности */
+        /* Адаптивность */
         @media (max-width: 1024px) {
             h1 { font-size: 3rem; }
             .container { gap: 25px; }
@@ -267,8 +276,12 @@
         }
     </style>
 </head>
+
 <body class="dark-mode">
+    <!-- Заголовок -->
     <h1>ElpeshkiArchive</h1>
+
+    <!-- Панель управления -->
     <div class="controls">
         <input type="text" id="searchInput" placeholder="Поиск...">
         <button id="themeButton" aria-label="Переключить тему" title="Переключить тему">
@@ -282,6 +295,8 @@
             </svg>
         </button>
     </div>
+
+    <!-- Контейнер кнопок -->
     <div class="container" id="boxContainer">
         <button class="box" data-name="Skid" data-description="Утилита для скачивания файлов">Skid</button>
         <button class="box" data-name="Flux" data-description="Программа для потоковой обработки">Flux</button>
@@ -295,84 +310,84 @@
         <button class="box" data-name="Meteor" data-description="Астрономический калькулятор">Meteor</button>
         <button class="box" data-name="Elysium" data-description="Виртуальная реальность">Elysium</button>
     </div>
-    <!-- Аудио для звукового эффекта -->
+
+    <!-- Звуковой эффект -->
     <audio id="clickSound" src="https://www.soundjay.com/buttons/click-01a.mp3" preload="auto"></audio>
-    <!-- Оверлей для анимации загрузки -->
+
+    <!-- Оверлей загрузки -->
     <div id="loadingOverlay">
         <div class="loader"></div>
     </div>
 
+    <!-- Скрипты -->
     <script>
         (function() {
+            // Глобальные переменные
             const originalOrder = Array.from(document.getElementById('boxContainer').children);
             let sortMode = 0;
 
-            function downloadFile(url) {
+            // Функции
+            const downloadFile = (url) => {
                 const link = document.createElement('a');
                 link.href = url;
                 link.download = url.split('/').pop();
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-            }
+            };
 
-            function toggleTheme() {
+            const toggleTheme = () => {
                 const body = document.body;
                 const themeIcon = document.getElementById('themeIcon');
-                if (body.classList.contains('light-mode')) {
-                    body.classList.remove('light-mode');
-                    themeIcon.setAttribute('d', 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 5a7 7 0 100 14 7 7 0 000-14z');
-                } else {
-                    body.classList.add('light-mode');
-                    themeIcon.setAttribute('d', 'M12 8a4 4 0 100 8 4 4 0 000-8zm0 10a6 6 0 01-6-6c0-1.5.5-2.9 1.5-4C5 9.2 4 11 4 13a8 8 0 008 8c2-.9 3.8-2.9 4.5-5.5A5.9 5.9 0 0112 18z');
-                }
-            }
+                const isLight = body.classList.contains('light-mode');
+                body.classList.toggle('light-mode');
+                themeIcon.setAttribute('d', isLight
+                    ? 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 5a7 7 0 100 14 7 7 0 000-14z'
+                    : 'M12 8a4 4 0 100 8 4 4 0 000-8zm0 10a6 6 0 01-6-6c0-1.5.5-2.9 1.5-4C5 9.2 4 11 4 13a8 8 0 008 8c2-.9 3.8-2.9 4.5-5.5A5.9 5.9 0 0112 18z');
+            };
 
-            function toggleSort() {
+            const toggleSort = () => {
                 sortMode = (sortMode + 1) % 3;
                 const container = document.getElementById('boxContainer');
                 const boxes = Array.from(container.children);
-                if (sortMode === 0) {
-                    boxes.sort((a, b) => originalOrder.indexOf(a) - originalOrder.indexOf(b));
-                } else if (sortMode === 1) {
-                    boxes.sort((a, b) => a.getAttribute('data-name').localeCompare(b.getAttribute('data-name')));
-                } else {
-                    boxes.sort((a, b) => a.getAttribute('data-name').length - b.getAttribute('data-name').length);
-                }
+                boxes.sort((a, b) => {
+                    if (sortMode === 0) return originalOrder.indexOf(a) - originalOrder.indexOf(b);
+                    if (sortMode === 1) return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
+                    return a.getAttribute('data-name').length - b.getAttribute('data-name').length;
+                });
                 container.innerHTML = '';
                 boxes.forEach(box => container.appendChild(box));
-            }
+            };
 
+            const handleSearch = (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                document.querySelectorAll('.box').forEach(box => {
+                    const name = box.getAttribute('data-name').toLowerCase();
+                    box.style.display = name.includes(searchTerm) ? '' : 'none';
+                });
+            };
+
+            // Обработчики событий
             document.querySelectorAll('.box').forEach(box => {
                 box.addEventListener('click', () => {
                     const name = box.getAttribute('data-name');
                     const url = `https://example.com/${name.toLowerCase()}`;
-                    document.getElementById('loadingOverlay').style.display = 'flex';
+                    const overlay = document.getElementById('loadingOverlay');
+                    overlay.style.display = 'flex';
                     downloadFile(url);
                     document.getElementById('clickSound').play();
-                    setTimeout(() => {
-                        document.getElementById('loadingOverlay').style.display = 'none';
-                    }, 2000);
+                    setTimeout(() => overlay.style.display = 'none', 2000);
                 });
             });
 
             document.getElementById('themeButton').addEventListener('click', toggleTheme);
             document.getElementById('sortButton').addEventListener('click', toggleSort);
+            document.getElementById('searchInput').addEventListener('input', handleSearch);
 
-            document.getElementById('searchInput').addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                const boxes = document.querySelectorAll('.box');
-                boxes.forEach(box => {
-                    const name = box.getAttribute('data-name').toLowerCase();
-                    box.style.display = name.includes(searchTerm) ? '' : 'none';
-                });
-            });
-
-            // Инициализация перетаскивания кнопок
-            const container = document.getElementById('boxContainer');
-            Sortable.create(container, {
+            // Инициализация перетаскивания
+            Sortable.create(document.getElementById('boxContainer'), {
                 animation: 150,
-                ghostClass: 'sortable-ghost',
+                ghostClass: 'sortable-ghost'
             });
         })();
     </script>
