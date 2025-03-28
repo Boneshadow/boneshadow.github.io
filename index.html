@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ElpeshkiArchive</title>
+    <!-- Подключаем Sortable.js для перетаскивания -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
@@ -128,7 +130,7 @@
             background: linear-gradient(145deg, #2a2a40, #1e1e2e);
             border-radius: 20px;
             padding: 25px;
-            text城乡: center;
+            text-align: center;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
             cursor: pointer;
             transition: all 0.3s ease;
@@ -158,6 +160,11 @@
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
             background: linear-gradient(145deg, #ff6b6b, #4ecdc4);
             color: #fff;
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(255, 107, 107, 0.5); }
+            to { box-shadow: 0 0 20px rgba(78, 205, 196, 0.8); }
         }
         .box:active {
             transform: scale(0.95);
@@ -172,28 +179,60 @@
             background: linear-gradient(145deg, #ff6b6b, #4ecdc4);
             color: #fff;
         }
-        .box[data-name]:hover::after {
-            content: attr(data-name);
+        .box[data-description]:hover::after {
+            content: attr(data-description);
             position: absolute;
-            bottom: -40px;
+            bottom: -60px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.85);
             color: #fff;
-            padding: 8px 12px;
+            padding: 10px 15px;
             border-radius: 8px;
             font-size: 14px;
-            white-space: nowrap;
+            white-space: normal;
+            width: 200px;
+            text-align: center;
             opacity: 0;
             animation: tooltipFade 0.3s ease forwards;
+            z-index: 10;
         }
         @keyframes tooltipFade {
-            from { opacity: 0; transform: translateX(-50%) translateY(5px); }
+            from { opacity: 0; transform: translateX(-50%) translateY(10px); }
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
-        body.light-mode .box[data-name]:hover::after {
+        body.light-mode .box[data-description]:hover::after {
             background: rgba(255, 255, 255, 0.95);
             color: #2d3748;
+        }
+        .sortable-ghost {
+            opacity: 0.5;
+            background: #c8ebfb;
+        }
+
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #ff6b6b;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Медиа-запросы для адаптивности */
@@ -244,17 +283,23 @@
         </button>
     </div>
     <div class="container" id="boxContainer">
-        <button class="box" data-name="Skid">Skid</button>
-        <button class="box" data-name="Flux">Flux</button>
-        <button class="box" data-name="None">None</button>
-        <button class="box" data-name="LiquidBounce">LiquidBounce</button>
-        <button class="box" data-name="VegaLine">VegaLine</button>
-        <button class="box" data-name="EvaWare">EvaWare</button>
-        <button class="box" data-name="Augustus">Augustus</button>
-        <button class="box" data-name="Nexus">Nexus</button>
-        <button class="box" data-name="DoomsDay">DoomsDay</button>
-        <button class="box" data-name="Meteor">Meteor</button>
-        <button class="box" data-name="Elysium">Elysium</button>
+        <button class="box" data-name="Skid" data-description="Утилита для скачивания файлов">Skid</button>
+        <button class="box" data-name="Flux" data-description="Программа для потоковой обработки">Flux</button>
+        <button class="box" data-name="None" data-description="Пустышка для тестов">None</button>
+        <button class="box" data-name="LiquidBounce" data-description="Игровой мод для Minecraft">LiquidBounce</button>
+        <button class="box" data-name="VegaLine" data-description="Линейный редактор графики">VegaLine</button>
+        <button class="box" data-name="EvaWare" data-description="ПО для управления устройствами">EvaWare</button>
+        <button class="box" data-name="Augustus" data-description="Исторический архив данных">Augustus</button>
+        <button class="box" data-name="Nexus" data-description="Центр управления сетью">Nexus</button>
+        <button class="box" data-name="DoomsDay" data-description="Симулятор конца света">DoomsDay</button>
+        <button class="box" data-name="Meteor" data-description="Астрономический калькулятор">Meteor</button>
+        <button class="box" data-name="Elysium" data-description="Виртуальная реальность">Elysium</button>
+    </div>
+    <!-- Аудио для звукового эффекта -->
+    <audio id="clickSound" src="https://www.soundjay.com/buttons/click-01a.mp3" preload="auto"></audio>
+    <!-- Оверлей для анимации загрузки -->
+    <div id="loadingOverlay">
+        <div class="loader"></div>
     </div>
 
     <script>
@@ -302,7 +347,12 @@
                 box.addEventListener('click', () => {
                     const name = box.getAttribute('data-name');
                     const url = `https://example.com/${name.toLowerCase()}`;
+                    document.getElementById('loadingOverlay').style.display = 'flex';
                     downloadFile(url);
+                    document.getElementById('clickSound').play();
+                    setTimeout(() => {
+                        document.getElementById('loadingOverlay').style.display = 'none';
+                    }, 2000);
                 });
             });
 
@@ -316,6 +366,13 @@
                     const name = box.getAttribute('data-name').toLowerCase();
                     box.style.display = name.includes(searchTerm) ? '' : 'none';
                 });
+            });
+
+            // Инициализация перетаскивания кнопок
+            const container = document.getElementById('boxContainer');
+            Sortable.create(container, {
+                animation: 150,
+                ghostClass: 'sortable-ghost',
             });
         })();
     </script>
