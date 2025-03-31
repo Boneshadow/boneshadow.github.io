@@ -127,7 +127,7 @@
             text-align: center;
             z-index: 1;
             animation: fadeIn 1.5s ease-in-out;
-            min-height: calc(100vh - 80px);
+            flex: 1;
             padding: 20px;
         }
 
@@ -171,6 +171,20 @@
         .learn-more-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+            color: #d1d1d1;
+            z-index: 1;
+        }
+
+        footer p {
+            margin: 0;
         }
 
         /* Адаптивность для планшетов (до 768px) */
@@ -234,6 +248,11 @@
                 width: 70%;
                 height: 70%;
             }
+
+            footer {
+                font-size: 12px;
+                padding: 10px 15px;
+            }
         }
 
         /* Адаптивность для телефонов (до 480px) */
@@ -280,6 +299,11 @@
                 width: 90%;
                 height: 90%;
             }
+
+            footer {
+                font-size: 10px;
+                padding: 8px 10px;
+            }
         }
     </style>
 </head>
@@ -303,6 +327,10 @@
         <p>Dive into popular songs, master vocabulary, and perfect pronunciation with interactive lyrics, quizzes, and progress tracking. Our platform turns hit tracks into fun, effective <span class="no-wrap">lessons—boosting</span> listening skills, grammar, and confidence. Sing, learn, and track your growth effortlessly. Start your musical journey to fluency today!</p>
         <button class="learn-more-btn" onclick="window.location.href='about.html'">LEARN MORE</button>
     </main>
+
+    <footer>
+        <p>&copy; 2025 SINGLISH. All rights reserved. Unauthorized copying or reproduction of this content is prohibited.</p>
+    </footer>
 
     <script>
         function toggleMenu() {
