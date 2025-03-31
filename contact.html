@@ -23,6 +23,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
         /* Фоновые круги с анимацией */
@@ -167,20 +168,24 @@
             transform: scale(1.2);
         }
 
-        /* Адаптивность */
+        /* Адаптивность для планшетов (до 768px) */
         @media (max-width: 768px) {
             header {
-                padding: 20px 30px;
+                padding: 15px 30px;
+            }
+
+            .logo {
+                font-size: 20px;
             }
 
             nav ul {
                 display: none;
                 flex-direction: column;
                 position: absolute;
-                top: 70px;
-                right: 30px;
+                top: 60px;
+                right: 20px;
                 background: #1e2a44;
-                padding: 20px;
+                padding: 15px;
                 border-radius: 10px;
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
                 opacity: 0;
@@ -198,6 +203,10 @@
                 margin: 10px 0;
             }
 
+            nav ul li a {
+                font-size: 14px;
+            }
+
             .menu-icon {
                 display: block;
             }
@@ -208,11 +217,65 @@
 
             main p {
                 font-size: 16px;
-                padding: 0 20px;
+                padding: 0 15px;
             }
 
             .social-links a {
                 font-size: 32px;
+            }
+
+            body::before, body::after {
+                width: 70%;
+                height: 70%;
+            }
+        }
+
+        /* Адаптивность для телефонов (до 480px) */
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 20px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            nav ul {
+                top: 50px;
+                right: 10px;
+                padding: 10px;
+            }
+
+            nav ul li a {
+                font-size: 12px;
+            }
+
+            .menu-icon {
+                font-size: 20px;
+            }
+
+            main h1 {
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
+
+            main p {
+                font-size: 14px;
+                padding: 0 10px;
+                line-height: 1.6;
+            }
+
+            .social-links {
+                gap: 20px;
+            }
+
+            .social-links a {
+                font-size: 28px;
+            }
+
+            body::before, body::after {
+                width: 90%;
+                height: 90%;
             }
         }
     </style>
