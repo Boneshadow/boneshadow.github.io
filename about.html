@@ -26,26 +26,30 @@
         }
 
         /* Фоновые круги с анимацией */
-        body::before {
+        body::before, body::after {
             content: '';
             position: absolute;
-            top: -20%;
-            left: -20%;
             width: 50%;
             height: 50%;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: float 10s infinite ease-in-out;
+            border-radius: 50%;
+            animation: rotate 30s infinite linear, float 10s infinite ease-in-out;
+        }
+
+        body::before {
+            top: -20%;
+            left: -20%;
         }
 
         body::after {
-            content: '';
-            position: absolute;
             bottom: -20%;
             right: -20%;
-            width: 50%;
-            height: 50%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: float 15s infinite ease-in-out;
+            animation-duration: 20s, 15s;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes float {
@@ -66,6 +70,7 @@
             font-size: 24px;
             font-weight: 600;
             color: #00c4ff;
+            animation: fadeInSlide 1s ease-in-out;
         }
 
         nav {
@@ -77,6 +82,7 @@
             list-style: none;
             display: flex;
             gap: 30px;
+            animation: fadeInSlide 1.5s ease-in-out;
         }
 
         nav ul li a {
@@ -132,6 +138,11 @@
 
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInSlide {
+            0% { opacity: 0; transform: translateY(-20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
@@ -291,7 +302,7 @@
 
     <main>
         <h1>About SINGLISH</h1>
-        <p>Welcome to SINGLISH —where language meets melody to make English learning joyful and effective! Our mission is to transform the way you learn by turning hit songs into engaging lessons. Whether you’re a beginner or advancing your skills, we blend the universal appeal of music with innovative tools to help you master vocabulary, grammar, pronunciation, and cultural nuances. Explore curated playlists across genres like pop, rock, hip-hop, and indie, each paired with interactive lyrics that let you click for instant translations, definitions, and pronunciation guides. Test your comprehension with quizzes tailored to each song, track your progress through detailed analytics, and celebrate milestones as you grow from "Beginner" to "Fluent." By learning through music, you’ll boost memory retention, absorb real-world slang and expressions, and build confidence in a stress-free environment. Founded by language enthusiasts and music lovers, SINGLISH was born from the idea that language learning should feel as exciting as discovering a new favorite song. Partnering with linguists and educators, we’ve crafted lessons that are both effective and enjoyable. Join our global community, share your journey, and unlock the magic of English through music. Together, let’s turn every chorus into a conversation and every verse into a victory. Start your journey today—where every song is a step toward fluency!</p>
+        <p>Welcome to SINGLISH —where language meets melody to make English learning joyful and effective! Our mission is to transform the way you learn by turning hit songs into engaging lessons. We believe that music is a powerful tool for language acquisition, making learning not only effective but also enjoyable. Join us on this melodic journey to mastering English!</p>
     </main>
 
     <footer>
