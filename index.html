@@ -26,26 +26,30 @@
         }
 
         /* Фоновые круги с анимацией */
-        body::before {
+        body::before, body::after {
             content: '';
             position: absolute;
-            top: -20%;
-            left: -20%;
             width: 50%;
             height: 50%;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: float 10s infinite ease-in-out;
+            border-radius: 50%;
+            animation: rotate 30s infinite linear, float 10s infinite ease-in-out;
+        }
+
+        body::before {
+            top: -20%;
+            left: -20%;
         }
 
         body::after {
-            content: '';
-            position: absolute;
             bottom: -20%;
             right: -20%;
-            width: 50%;
-            height: 50%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: float 15s infinite ease-in-out;
+            animation-duration: 20s, 15s;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes float {
@@ -66,6 +70,7 @@
             font-size: 24px;
             font-weight: 600;
             color: #00c4ff;
+            animation: fadeInSlide 1s ease-in-out;
         }
 
         nav {
@@ -77,6 +82,7 @@
             list-style: none;
             display: flex;
             gap: 30px;
+            animation: fadeInSlide 1.5s ease-in-out;
         }
 
         nav ul li a {
@@ -133,6 +139,11 @@
 
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInSlide {
+            0% { opacity: 0; transform: translateY(-20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
@@ -324,7 +335,7 @@
 
     <main>
         <h1>Welcome</h1>
-        <p>Dive into popular songs, master vocabulary, and perfect pronunciation with interactive lyrics, quizzes, and progress tracking. Our platform turns hit tracks into fun, effective <span class="no-wrap">lessons—boosting</span> listening skills, grammar, and confidence. Sing, learn, and track your growth effortlessly. Start your musical journey to fluency today!</p>
+        <p>Dive into popular songs, master vocabulary, and perfect pronunciation with interactive lyrics, quizzes, and progress tracking. Our platform turns hit tracks into fun, effective learning experiences.</p>
         <button class="learn-more-btn" onclick="window.location.href='about.html'">LEARN MORE</button>
     </main>
 
