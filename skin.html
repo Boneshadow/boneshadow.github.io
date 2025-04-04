@@ -241,6 +241,45 @@
                 <button class="check-btn" onclick="checkVocabularyMatch()">Check Answers</button>
                 <p id="vocab-result" class="result-text"></p>
             </div>
+
+            <div class="exercise" id="vocabulary-match-part2">
+                <h3>Vocabulary Match Part 2</h3>
+                <p class="instruction">Match the words from the song with their Russian translations by selecting the correct option:</p>
+                <div class="question-list">
+                    <div class="question-item vocab-item">
+                        <span class="vocab-word">Pop a pill</span>
+                        <select name="v2-1">
+                            <option value="">Select</option>
+                            <option value="Спеть песню">A. Спеть песню</option>
+                            <option value="Принять таблетку">B. Принять таблетку</option>
+                            <option value="Позвонить другу">C. Позвонить другу</option>
+                            <option value="Нарисовать картину">D. Нарисовать картину</option>
+                        </select>
+                    </div>
+                    <div class="question-item vocab-item">
+                        <span class="vocab-word">Past</span>
+                        <select name="v2-2">
+                            <option value="">Select</option>
+                            <option value="Будущее">A. Будущее</option>
+                            <option value="Настоящее">B. Настоящее</option>
+                            <option value="Прошлое">C. Прошлое</option>
+                            <option value="Фантазии">D. Фантазии</option>
+                        </select>
+                    </div>
+                    <div class="question-item vocab-item">
+                        <span class="vocab-word">Dreams</span>
+                        <select name="v2-3">
+                            <option value="">Select</option>
+                            <option value="Реальные события">A. Реальные события</option>
+                            <option value="Мысли во сне">B. Мысли во сне</option>
+                            <option value="Научные факты">C. Научные факты</option>
+                            <option value="Фильмы">D. Фильмы</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkVocabularyMatchPart2()">Check Answers</button>
+                <p id="vocab-result-part2" class="result-text"></p>
+            </div>
         </section>
     </main>
 
@@ -300,7 +339,7 @@
         // Ключи к заданию Vocabulary Match
         const correctAnswersVocab = {
             'v1': 'Кожа',
-            'v2': 'Кости', // Подтверждено, что это вариант "C"
+            'v2': 'Кости',
             'v3': 'Эмоции/Чувства',
             'v4': 'Преследовать/Гнаться',
             'v5': 'Крыша',
@@ -329,6 +368,41 @@
 
             const resultText = `You got ${correctCount} out of ${total} correct!`;
             const resultElement = document.getElementById('vocab-result');
+            resultElement.textContent = resultText;
+            resultElement.style.opacity = '0';
+            setTimeout(() => {
+                resultElement.style.transition = 'opacity 0.5s ease';
+                resultElement.style.opacity = '1';
+            }, 10);
+        }
+
+        // Ключи к заданию Vocabulary Match Part 2
+        const correctAnswersVocabPart2 = {
+            'v2-1': 'Принять таблетку',
+            'v2-2': 'Прошлое',
+            'v2-3': 'Мысли во сне'
+        };
+
+        function checkVocabularyMatchPart2() {
+            const selects = document.querySelectorAll('#vocabulary-match-part2 select');
+            let correctCount = 0;
+            let total = selects.length;
+
+            selects.forEach(select => {
+                const userAnswer = select.value;
+                const correctAnswer = correctAnswersVocabPart2[select.name];
+                if (userAnswer === correctAnswer) {
+                    correctCount++;
+                    select.style.backgroundColor = '#d4edda'; // Зеленый для правильных
+                    select.style.color = '#155724'; // Темный текст для контраста
+                } else {
+                    select.style.backgroundColor = '#f8d7da'; // Красный для неправильных
+                    select.style.color = '#721c24'; // Темный текст для контраста
+                }
+            });
+
+            const resultText = `You got ${correctCount} out of ${total} correct!`;
+            const resultElement = document.getElementById('vocab-result-part2');
             resultElement.textContent = resultText;
             resultElement.style.opacity = '0';
             setTimeout(() => {
@@ -389,6 +463,6 @@
             return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
         }
     </script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92b10070dc60bcb9',t:'MTc0Mzc3MTc2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92b216b06b824519',t:'MTc0Mzc4MzE2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
