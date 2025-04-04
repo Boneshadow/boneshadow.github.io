@@ -57,25 +57,12 @@ nav ul li a {
     text-decoration: none;
     font-size: clamp(0.875rem, 1.5vw, 1rem);
     font-weight: 700;
-    text-transform: uppercase; /* Spotify uses uppercase for nav links */
     position: relative;
     transition: color 0.3s ease;
 }
 
-nav ul li a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background: #1db954; /* Green underline on hover */
-    bottom: -5px;
-    left: 0;
-    transition: width 0.3s ease;
-}
-
-nav ul li a:hover::after {
-    width: 100%;
-}
+/* Удаляем полоску при наведении */
+/* nav ul li a::after и nav ul li a:hover::after больше не нужны */
 
 nav ul li a:hover {
     color: #1db954; /* Green on hover */
@@ -633,10 +620,6 @@ footer {
         display: block;
     }
 
-    nav ul li a:hover::after {
-        width: 0; /* Убираем подчёркивание в мобильной версии */
-    }
-
     nav ul li a:hover {
         transform: none;
         color: #1db954;
@@ -807,10 +790,6 @@ footer {
         display: block;
     }
 
-    nav ul li a:hover::after {
-        width: 0;
-    }
-
     nav ul li a:hover {
         transform: none;
         color: #1db954;
@@ -954,10 +933,6 @@ footer {
         font-size: 1.125rem;
         padding: 0.5rem 1rem;
         display: block;
-    }
-
-    nav ul li a:hover::after {
-        width: 0;
     }
 
     nav ul li a:hover {
