@@ -253,6 +253,65 @@
                 <button class="check-btn" onclick="checkVocabularyMatch()">Check Answers</button>
                 <p id="vocab-result" class="result-text"></p>
             </div>
+
+            <div class="exercise" id="vocabulary-match-part2">
+                <h3>Vocabulary Match Part 2</h3>
+                <p class="instruction">Match the words from the song with their definitions by selecting the correct option:</p>
+                <div class="question-list">
+                    <div class="question-item vocab-item">
+                        <span class="vocab-word">Pill</span>
+                        <select name="v2-1">
+                            <option value="">Select</option>
+                            <option value="A small, round fruit">A. A small, round fruit</option>
+                            <option value="A small medicinal tablet">B. A small medicinal tablet</option>
+                            <option value="A small, flat stone">C. A small, flat stone</option>
+                            <option value="A small, round coin">D. A small, round coin</option>
+                        </select>
+                    </div>
+                    <div class="question-item vocab-item">
+                        <span class="vocab-word">Devoted</span>
+                        <select name="v2-2">
+                            <option value="">Select</option>
+                            <option value="Feeling tired or bored">A. Feeling tired or bored</option>
+                            <option value="Giving loyalty or love">B. Giving loyalty or love</option>
+                            <option value="Feeling angry or upset">C. Feeling angry or upset</option>
+                            <option value="Feeling scared or nervous">D. Feeling scared or nervous</option>
+                        </select>
+                    </div>
+                    <div class="question-item vocab-item">
+                        <span class="vocab-word">Figures</span>
+                        <select name="v2-3">
+                            <option value="">Select</option>
+                            <option value="Stories or tales">A. Stories or tales</option>
+                            <option value="Drawings or paintings">B. Drawings or paintings</option>
+                            <option value="Shapes or outlines">C. Shapes or outlines</option>
+                            <option value="Songs or poems">D. Songs or poems</option>
+                        </select>
+                    </div>
+                    <div class="question-item vocab-item">
+                        <span class="vocab-word">Moment</span>
+                        <select name="v2-4">
+                            <option value="">Select</option>
+                            <option value="A long period of time">A. A long period of time</option>
+                            <option value="A short period of time">B. A short period of time</option>
+                            <option value="A place or location">C. A place or location</option>
+                            <option value="A feeling or emotion">D. A feeling or emotion</option>
+                        </select>
+                    </div>
+                    <div class="question-item vocab-item">
+                        <span class="vocab-word">Lifestyle</span>
+                        <select name="v2-5">
+                            <option value="">Select</option>
+                            <option value="A type of food">A. A type of food</option>
+                            <option value="A way of traveling">B. A way of traveling</option>
+                            <option value="A way of living">C. A way of living</option>
+                            <option value="A type of clothing">D. A type of clothing</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkVocabularyMatchPart2()">Check Answers</button>
+                <p id="vocab-result-part2" class="result-text"></p>
+            </div>
         </section>
     </main>
 
@@ -348,6 +407,43 @@
             }, 10);
         }
 
+        // Ключи к заданию Vocabulary Match Part 2
+        const correctAnswersVocabPart2 = {
+            'v2-1': 'A small medicinal tablet',
+            'v2-2': 'Giving loyalty or love',
+            'v2-3': 'Shapes or outlines',
+            'v2-4': 'A short period of time',
+            'v2-5': 'A way of living'
+        };
+
+        function checkVocabularyMatchPart2() {
+            const selects = document.querySelectorAll('#vocabulary-match-part2 select');
+            let correctCount = 0;
+            let total = selects.length;
+
+            selects.forEach(select => {
+                const userAnswer = select.value;
+                const correctAnswer = correctAnswersVocabPart2[select.name];
+                if (userAnswer === correctAnswer) {
+                    correctCount++;
+                    select.style.backgroundColor = '#d4edda'; // Зеленый для правильных
+                    select.style.color = '#155724'; // Темный текст для контраста
+                } else {
+                    select.style.backgroundColor = '#f8d7da'; // Красный для неправильных
+                    select.style.color = '#721c24'; // Темный текст для контраста
+                }
+            });
+
+            const resultText = `You got ${correctCount} out of ${total} correct!`;
+            const resultElement = document.getElementById('vocab-result-part2');
+            resultElement.textContent = resultText;
+            resultElement.style.opacity = '0';
+            setTimeout(() => {
+                resultElement.style.transition = 'opacity 0.5s ease';
+                resultElement.style.opacity = '1';
+            }, 10);
+        }
+
         // Управление медиаплеером
         const audio = document.getElementById('audio-player');
         const playPauseBtn = document.querySelector('.play-pause');
@@ -400,6 +496,6 @@
             return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
         }
     </script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92b1362add16bca7',t:'MTc0Mzc3Mzk2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsBySlag('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92b1362add16bca7',t:'MTc0Mzc3Mzk2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
