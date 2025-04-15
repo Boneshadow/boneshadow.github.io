@@ -1,20 +1,17 @@
-/* styles.css */
-
-/* Подключаем Montserrat с весами, включая 900 (Black) */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', Arial, sans-serif; /* Основной шрифт теперь Montserrat */
+    font-family: 'Montserrat', Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 body {
     min-height: 100vh;
-    background: linear-gradient(180deg, #121212 0%, #1a1a1a 100%); /* Spotify-like dark gradient */
+    background: linear-gradient(180deg, #121212 0%, #1a1a1a 100%);
     color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -23,21 +20,20 @@ body {
     font-size: clamp(1rem, 2.5vw, 1.125rem);
 }
 
-/* Навигация */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.8); /* Slightly transparent black */
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
 }
 
 .logo {
     font-size: clamp(1.75rem, 2.5vw, 2.25rem);
-    font-weight: 900; /* Black для логотипа */
-    color: #1db954; /* Spotify green */
+    font-weight: 900;
+    color: #1db954;
     transition: transform 0.3s ease;
 }
 
@@ -52,16 +48,16 @@ nav ul {
 }
 
 nav ul li a {
-    color: #b3b3b3; /* Light gray для nav links */
+    color: #b3b3b3;
     text-decoration: none;
     font-size: clamp(0.875rem, 1.5vw, 1rem);
-    font-weight: 700; /* Жирный, но не Black, для читаемости */
+    font-weight: 700;
     position: relative;
     transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: #1db954; /* Green on hover */
+    color: #1db954;
 }
 
 .menu-icon {
@@ -81,7 +77,6 @@ nav ul li a:hover {
     color: #1db954;
 }
 
-/* Основной контент */
 main {
     display: flex;
     flex-direction: column;
@@ -99,42 +94,41 @@ main {
 }
 
 main h1 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem); /* Larger, как у Spotify */
-    font-weight: 900; /* Black для заголовков */
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
     margin-bottom: 1.5rem;
     color: #ffffff;
 }
 
 main h2 {
     font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 900; /* Black для подзаголовков */
+    font-weight: 900;
     color: #ffffff;
     margin-bottom: 1rem;
 }
 
 main p {
     font-size: clamp(1rem, 2vw, 1.25rem);
-    max-width: 60ch; /* Узкий для читаемости */
+    max-width: 60ch;
     margin: 0 auto;
     line-height: 1.6;
-    color: #b3b3b3; /* Light gray для secondary text */
-    font-weight: 400; /* Обычный вес для текста */
+    color: #b3b3b3;
+    font-weight: 400;
 }
 
-/* Специфические стили для index.html */
 .index-main {
     justify-content: center;
     padding: 5rem 2rem;
     position: relative;
-    background: linear-gradient(180deg, #121212 0%, #1a1a1a 100%); /* Статичный фон */
+    background: linear-gradient(180deg, #121212 0%, #1a1a1a 100%);
 }
 
 .index-main::before {
-    display: none; /* Отключаем радиальный градиент */
+    display: none;
 }
 
 .index-main h1 {
-    font-size: clamp(3rem, 8vw, 6rem); /* Еще больше для hero */
+    font-size: clamp(3rem, 8vw, 6rem);
     line-height: 1.1;
 }
 
@@ -142,17 +136,16 @@ main p {
     margin-bottom: 2rem;
 }
 
-/* Общий стиль для кнопок learn-more-btn, add-review-btn, и check-btn */
 .learn-more-btn,
 .reviews-main .add-review-btn,
 .check-btn {
     padding: 0.875rem 2.5rem;
     font-size: clamp(0.875rem, 1.5vw, 1rem);
-    font-weight: 900; /* Black для кнопок */
+    font-weight: 900;
     color: #ffffff;
-    background: #1db954; /* Spotify green */
+    background: #1db954;
     border: none;
-    border-radius: 50px; /* Более скругленные углы */
+    border-radius: 50px;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.3s ease;
     min-width: 10rem;
@@ -164,8 +157,8 @@ main p {
 .learn-more-btn:hover:not(:active),
 .reviews-main .add-review-btn:hover:not(:active),
 .check-btn:hover:not(:active) {
-    background: #1ed760; /* Светлее зеленый при наведении */
-    transform: scale(1.05); /* Легкое увеличение вместо смещения */
+    background: #1ed760;
+    transform: scale(1.05);
 }
 
 .learn-more-btn:active,
@@ -174,17 +167,14 @@ main p {
     transform: scale(0.95);
 }
 
-/* Специфические стили для reviews.html */
 .reviews-main .add-review-btn {
     margin-top: 2rem;
 }
 
-/* Специфические стили для about.html */
 .about-main p {
     margin-bottom: 1.25rem;
 }
 
-/* Специфические стили для contact.html */
 .social-links {
     display: flex;
     gap: 2rem;
@@ -198,14 +188,13 @@ main p {
 
 .social-links a:hover:not(:active) {
     color: #1db954;
-    transform: scale(1.1); /* Увеличение вместо поворота */
+    transform: scale(1.1);
 }
 
 .social-links a:active {
     transform: scale(0.9);
 }
 
-/* Специфические стили для courses.html */
 .courses-main .artist-list {
     margin-top: 2rem;
 }
@@ -226,21 +215,21 @@ main p {
     margin: 1rem 0;
     gap: 1rem;
     flex-wrap: wrap;
-    background: #181818; /* Spotify card background */
+    background: #181818;
     padding: 1rem;
     border-radius: 8px;
     transition: background 0.3s ease;
 }
 
 .courses-main .artist-list ul li:hover {
-    background: #282828; /* Чуть светлее при наведении */
+    background: #282828;
 }
 
 .courses-main .artist-list .artist-name {
     color: #ffffff;
     text-decoration: none;
     font-size: clamp(1.125rem, 2vw, 1.5rem);
-    font-weight: 900; /* Black для названий артистов */
+    font-weight: 900;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -273,7 +262,6 @@ main p {
     transform: scale(0.9);
 }
 
-/* Специфические стили для ivoxygen.html */
 .tracks-main .track-list {
     margin-top: 2rem;
 }
@@ -290,14 +278,14 @@ main p {
 
 .tracks-main .track-list ul li {
     margin: 0.5rem 0;
-    background: #181818; /* Spotify card background */
+    background: #181818;
     padding: 1rem;
     border-radius: 8px;
     transition: background 0.3s ease;
 }
 
 .tracks-main .track-list ul li:hover {
-    background: #282828; /* Чуть светлее при наведении */
+    background: #282828;
 }
 
 .tracks-main .track-list .track-item {
@@ -311,7 +299,7 @@ main p {
     color: #ffffff;
     text-decoration: none;
     font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-    font-weight: 900; /* Black для названий треков */
+    font-weight: 900;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -348,14 +336,13 @@ main p {
     font-size: clamp(1rem, 1.5vw, 1.125rem);
     color: #b3b3b3;
     margin-top: 1rem;
-    font-weight: 400; /* Обычный вес для заметок */
+    font-weight: 400;
 }
 
-/* Специфические стили для skin.html */
 .track-page {
     padding: 3rem 1.5rem;
     text-align: center;
-    background: linear-gradient(180deg, #282828 0%, #121212 100%); /* Градиент для страницы трека */
+    background: linear-gradient(180deg, #282828 0%, #121212 100%);
 }
 
 .track-page h1 {
@@ -402,14 +389,14 @@ audio {
     padding: 1.5rem;
     border-radius: 8px;
     margin-bottom: 2rem;
-    overflow: hidden; /* Предотвращаем перекрытие */
+    overflow: hidden;
 }
 
 .exercise h3 {
     font-size: clamp(1.25rem, 2vw, 1.5rem);
     margin-bottom: 1rem;
     color: #ffffff;
-    font-weight: 900; /* Black для подзаголовков упражнений */
+    font-weight: 900;
 }
 
 .exercise p {
@@ -426,19 +413,18 @@ audio {
     font-size: 1rem;
 }
 
-/* Улучшенный дизайн для Fill in the Blanks */
 .exercise .instruction {
     font-size: clamp(1rem, 1.5vw, 1.125rem);
     color: #b3b3b3;
     margin-bottom: 1.5rem;
-    font-weight: 400; /* Обычный вес для инструкций */
+    font-weight: 400;
 }
 
 .exercise .question-list {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    margin-bottom: 2rem; /* Отступ перед кнопкой */
+    margin-bottom: 2rem;
 }
 
 .exercise .question-item {
@@ -474,7 +460,7 @@ audio {
     margin: 0;
     font-size: clamp(0.875rem, 1.5vw, 1rem);
     line-height: 1.6;
-    font-weight: 400; /* Обычный вес для вопросов */
+    font-weight: 400;
 }
 
 .exercise .question-item select {
@@ -487,7 +473,7 @@ audio {
     color: #ffffff;
     font-size: clamp(0.875rem, 1.5vw, 1rem);
     font-family: 'Montserrat', sans-serif;
-    font-weight: 400; /* Обычный вес для выпадающих списков */
+    font-weight: 400;
     cursor: pointer;
     appearance: none;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%231db954" viewBox="0 0 16 16"><path d="M8 12L2 6h12z"/></svg>');
@@ -514,12 +500,11 @@ audio {
 .exercise .result-text {
     margin-top: 1.5rem;
     font-size: clamp(1rem, 1.5vw, 1.125rem);
-    font-weight: 900; /* Black для результатов */
+    font-weight: 900;
     color: #1db954;
     text-align: center;
 }
 
-/* Стили для Vocabulary Match */
 .exercise .vocab-item {
     display: flex;
     justify-content: space-between;
@@ -536,7 +521,7 @@ audio {
 }
 
 .exercise .vocab-word {
-    font-weight: 900; /* Black для слов */
+    font-weight: 900;
     color: #1db954;
     width: 40%;
     text-align: left;
@@ -553,7 +538,7 @@ audio {
     color: #ffffff;
     font-size: clamp(0.875rem, 1.5vw, 1rem);
     font-family: 'Montserrat', sans-serif;
-    font-weight: 400; /* Обычный вес для переводов */
+    font-weight: 400;
     cursor: pointer;
     appearance: none;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%231db954" viewBox="0 0 16 16"><path d="M8 12L2 6h12z"/></svg>');
@@ -563,10 +548,9 @@ audio {
     transition: background-color 0.3s ease;
 }
 
-/* Стили для Spotify-подобного медиаплеера */
 .spotify-player {
     width: clamp(300px, 80vw, 500px);
-    background: #181818; /* Темный фон как у Spotify */
+    background: #181818;
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -574,7 +558,7 @@ audio {
 }
 
 .spotify-player audio {
-    display: none; /* Скрываем стандартный плеер */
+    display: none;
 }
 
 .player-controls {
@@ -596,7 +580,7 @@ audio {
 }
 
 .control-btn:hover:not(:active) {
-    color: #1db954; /* Зеленый акцент при наведении */
+    color: #1db954;
     transform: scale(1.1);
 }
 
@@ -605,15 +589,15 @@ audio {
 }
 
 .control-btn.play-pause i.fa-pause {
-    display: none; /* Скрываем иконку паузы по умолчанию */
+    display: none;
 }
 
 .control-btn.play-pause.playing i.fa-play {
-    display: none; /* Скрываем play, когда играет */
+    display: none;
 }
 
 .control-btn.playing i.fa-pause {
-    display: inline; /* Показываем паузу, когда играет */
+    display: inline;
 }
 
 .progress-container {
@@ -777,21 +761,17 @@ audio {
     border-radius: 5px;
 }
 
-/* Футер */
 footer {
     text-align: center;
     padding: 1rem 1.5rem;
-    background: #181818; /* Чуть светлее, чем body */
+    background: #181818;
     font-size: clamp(0.75rem, 1.5vw, 1rem);
     color: #b3b3b3;
     z-index: 1;
     width: 100%;
-    font-weight: 400; /* Обычный вес для футера */
+    font-weight: 400;
 }
 
-/* Адаптивность */
-
-/* Очень маленькие экраны (<320px) */
 @media (max-width: 320px) {
     header {
         padding: 0.75rem 1rem;
@@ -997,7 +977,6 @@ footer {
     }
 }
 
-/* Телефоны (321px - 480px) */
 @media (min-width: 321px) and (max-width: 480px) {
     header {
         padding: 1rem 1.5rem;
@@ -1168,7 +1147,6 @@ footer {
     }
 }
 
-/* Планшеты (481px - 768px) */
 @media (min-width: 481px) and (max-width: 768px) {
     header {
         padding: 1.25rem 2rem;
@@ -1276,7 +1254,6 @@ footer {
     }
 }
 
-/* Планшеты и небольшие ноутбуки (769px - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
     header {
         padding: 1.5rem 2.5rem;
@@ -1320,7 +1297,6 @@ footer {
     }
 }
 
-/* Ноутбуки (1025px - 1440px) */
 @media (min-width: 1025px) and (max-width: 1440px) {
     header {
         padding: 1.5rem 3rem;
@@ -1355,7 +1331,6 @@ footer {
     }
 }
 
-/* Большие экраны (>1440px) */
 @media (min-width: 1441px) {
     header {
         padding: 2rem 4rem;
